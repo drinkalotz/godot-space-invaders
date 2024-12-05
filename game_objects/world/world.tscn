@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://n2248fh8nfbv"]
+
+[ext_resource type="Script" path="res://game_objects/world/world.gd" id="1_r3hm0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ajlo"]
+size = Vector2(1226, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wd7b"]
+size = Vector2(1216, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndamr"]
+size = Vector2(19, 1345)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6pah"]
+size = Vector2(1349.5, 17)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_r3hm0")
+
+[node name="TopBoundryArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="TopCollision" type="CollisionShape2D" parent="TopBoundryArea"]
+position = Vector2(585, -10)
+shape = SubResource("RectangleShape2D_2ajlo")
+
+[node name="BottomBoundryArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="BottomCollision" type="CollisionShape2D" parent="BottomBoundryArea"]
+position = Vector2(580, 658)
+shape = SubResource("RectangleShape2D_7wd7b")
+
+[node name="LeftBoundryArea" type="Area2D" parent="." groups=["left_boundry"]]
+collision_layer = 36
+collision_mask = 4
+
+[node name="LeftCollision" type="CollisionShape2D" parent="LeftBoundryArea"]
+position = Vector2(-10, -4)
+shape = SubResource("RectangleShape2D_ndamr")
+
+[node name="RightBoundryArea" type="Area2D" parent="." groups=["right_boundry"]]
+collision_layer = 20
+collision_mask = 2
+
+[node name="RightCollision" type="CollisionShape2D" parent="RightBoundryArea"]
+position = Vector2(1160, -1.25009)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_q6pah")
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(580, 614)
+
+[node name="EnemySpawn" type="Marker2D" parent="."]
+position = Vector2(45, -116)
+
+[connection signal="area_entered" from="TopBoundryArea" to="." method="_on_top_boundry_area_area_entered"]

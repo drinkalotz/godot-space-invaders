@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="space-invaders"
+run/main_scene="res://game_objects/main/main.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://game_objects/autoload/game_manager.tscn"
+
+[display]
+
+window/stretch/mode="viewport"
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="WorldBoundry"
+2d_physics/layer_4="EndGame"
+2d_physics/layer_5="RightBoundry"
+2d_physics/layer_6="LeftBoundry"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

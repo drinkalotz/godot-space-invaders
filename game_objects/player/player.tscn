@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv71srlcmghko"]
+
+[ext_resource type="Script" path="res://game_objects/player/player.gd" id="1_ea7dj"]
+[ext_resource type="Texture2D" uid="uid://xxny8km1oy8r" path="res://game_objects/player/player.png" id="1_n1lts"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ilfv"]
+radius = 27.0
+
+[node name="Player" type="StaticBody2D"]
+collision_mask = 6
+script = ExtResource("1_ea7dj")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2ilfv")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("1_n1lts")
+
+[node name="BulletCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="BulletCooldownTimer" to="." method="_on_bullet_cooldown_timer_timeout"]

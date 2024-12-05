@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://251uhayxnyah"]
+
+[ext_resource type="Script" path="res://game_objects/bullets/player/player_bullet.gd" id="1_3q5n6"]
+[ext_resource type="Texture2D" uid="uid://di15ekecdtekv" path="res://game_objects/bullets/player/enemy_bullet.png" id="1_5bo75"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t3knh"]
+radius = 5.0
+height = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ps3a"]
+radius = 5.0
+height = 36.0
+
+[node name="PlayerBullet" type="StaticBody2D" groups=["player_bullet"]]
+collision_mask = 2
+script = ExtResource("1_3q5n6")
+
+[node name="PlayerBulletCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_t3knh")
+
+[node name="PlayerBulletSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_5bo75")
+
+[node name="PlayerBulletDeleteCollision" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="del_col" type="CollisionShape2D" parent="PlayerBulletDeleteCollision"]
+shape = SubResource("CapsuleShape2D_1ps3a")
+
+[connection signal="area_entered" from="PlayerBulletDeleteCollision" to="." method="_on_player_bullet_delete_collision_area_entered"]

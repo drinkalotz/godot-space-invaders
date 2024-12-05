@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://mo25ka5wav2g"]
+
+[ext_resource type="Script" path="res://game_objects/enemy/enemy.gd" id="1_5qtp8"]
+[ext_resource type="Texture2D" uid="uid://bas7ysx8gb3xs" path="res://game_objects/enemy/enemy1.png" id="1_rsn88"]
+[ext_resource type="PackedScene" uid="uid://cg1ur6oyfogrp" path="res://game_objects/components/health_component.tscn" id="1_tpfr2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu4rp"]
+size = Vector2(108, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j6xc"]
+size = Vector2(108, 90)
+
+[node name="Enemy" type="StaticBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 0
+script = ExtResource("1_5qtp8")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_tpfr2")]
+max_health = 1.0
+
+[node name="EnemyCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bu4rp")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_rsn88")
+
+[node name="EnemyDestroyArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 49
+
+[node name="EnemyDestroyCollision" type="CollisionShape2D" parent="EnemyDestroyArea"]
+shape = SubResource("RectangleShape2D_1j6xc")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="area_entered" from="EnemyDestroyArea" to="." method="_on_enemy_destroy_area_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
